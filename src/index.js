@@ -19,7 +19,11 @@ class App extends Component {
                 discoveryDocs: DISCOVERY_DOCS,
                 scope: SCOPES
             }).then(() => {
-                console.log(gapi.auth2.getAuthInstance().isSignedIn.get())
+                gapi.client.classroom.courses.list({
+                    pageSize: 10
+                }).then((response) => {
+                    console.log(response.result.courses)
+                })
             })
         })
     }
@@ -28,8 +32,12 @@ class App extends Component {
         return(
             <div>
                 <p>Classroom API Quickstart</p>
-                <button>Sign In</button>
-                <button>Sign Out</button>
+                <button onClick={(e) => {
+                    window.gapi.auth2.getAuthInstance().signIn();
+                }}>Sign In</button>
+                <button onClick={(e) => {
+                    window.gapi.auth2.getAuthInstance().signOut();
+                }}>Sign Out</button>
                 <pre></pre>
             </div>
         )
