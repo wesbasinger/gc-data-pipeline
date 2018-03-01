@@ -21,9 +21,12 @@ class App extends React.Component {
         this.state = {
             loggedIn: false,
             name: "",
-            picUri: "",
+            imageUrl: "",
             courses: []
         }
+        
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
     
     componentDidMount() {
@@ -41,19 +44,56 @@ class App extends React.Component {
             }).then(() => {
                 if(gapi.auth2.getAuthInstance().isSignedIn.get()) {
                     self.setState({loggedIn: true})
+                    
+                    const name = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
+                    const imageUrl = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl();
+                    
+                    self.setState({name, imageUrl})
                 }   
             })
             
         })
     }
     
+    handleLogout() {
+        
+        console.log("Handle logout is firing")
+        this.setState({
+            loggedIn:false,
+            name: "",
+            imageUrl: ""
+        })
+        
+        require('google-client-api')().then((gapi) => {
+            gapi.auth2.getAuthInstance().signOut()
+        })
+        
+    }
+    
+    handleLogin() {
+        
+
+        require('google-client-api')().then((gapi) => {
+            gapi.auth2.getAuthInstance().signIn()
+            
+            const name = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
+            const imageUrl = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl();
+            
+            console.log(`name is ${name} and imageUrl is ${imageUrl}`)
+        })
+        
+    }
+    
     render() {
         return(
             <Router>
                 <div>
-                    <Header />
+                    <Header loggedIn={this.state.loggedIn} 
+                            name={this.state.name} 
+                            imageUrl={this.state.imageUrl}
+                            onLogout={this.handleLogout}/>
                     <Switch>
-                        <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn}/>}/>
+                        <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn} onLogin={this.handleLogin}/>}/>
                     </Switch>
                     <Footer />
                 </div>

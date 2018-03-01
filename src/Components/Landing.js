@@ -7,7 +7,7 @@ const Landing = (props) => {
         )
     } else {
         return(
-            <div>Please log in.</div>
+            <button onClick={props.onLogin}>Log In</button>
         )
     }
 }
