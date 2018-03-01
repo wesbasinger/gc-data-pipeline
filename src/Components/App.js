@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import api from '../api';
 
 import Header from './Header';
 import Footer from './Footer';
+import Landing from './Landing';
 
 const CLIENT_ID = "1093742908149-94g80lmd7ur6j1netgio5jg79a36p82q.apps.googleusercontent.com";
 const API_KEY = "AIzaSyBT7TPNHF_xfRNQQoNWI0fDE_-1P21rP7Y";
@@ -40,15 +41,9 @@ class App extends React.Component {
             <Router>
                 <div>
                     <Header />
-                        <div>
-                            <button onClick={(e) => {
-                                window.gapi.auth2.getAuthInstance().signIn();
-                            }}>Sign In</button>
-                            <button onClick={(e) => {
-                                window.gapi.auth2.getAuthInstance().signOut();
-                            }}>Sign Out</button>
-                            <pre></pre>
-                        </div>
+                    <Switch>
+                        <Landing exact path="/" component={Landing} />
+                    </Switch>
                     <Footer />
                 </div>
             </Router>
