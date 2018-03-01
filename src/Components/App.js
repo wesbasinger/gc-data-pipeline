@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import api from '../api';
 
@@ -15,7 +15,21 @@ const SCOPES = "https://www.googleapis.com/auth/classroom.courses.readonly";
 
 class App extends React.Component {
     
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            loggedIn: false,
+            name: "",
+            picUri: "",
+            courses: []
+        }
+    }
+    
     componentDidMount() {
+        
+        var self = this;
+        
         require('google-client-api')().then((gapi) => {
             console.log('initializing GAPI...');
             
@@ -25,14 +39,11 @@ class App extends React.Component {
                 discoveryDocs: DISCOVERY_DOCS,
                 scope: SCOPES
             }).then(() => {
-                api.getCourses((results) => {
-                    const activeCourses = results.filter((course) => {
-                        return(course.courseState === 'ACTIVE')
-                    })
-                    
-                    console.log(activeCourses)
-                })
+                if(gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                    self.setState({loggedIn: true})
+                }   
             })
+            
         })
     }
     
@@ -42,7 +53,7 @@ class App extends React.Component {
                 <div>
                     <Header />
                     <Switch>
-                        <Landing exact path="/" component={Landing} />
+                        <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn}/>}/>
                     </Switch>
                     <Footer />
                 </div>
