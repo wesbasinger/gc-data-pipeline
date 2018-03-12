@@ -74,16 +74,18 @@ class App extends React.Component {
         const self = this;
 
         require('google-client-api')().then((gapi) => {
-            gapi.auth2.getAuthInstance().signIn()
-            
-            const name = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-            const imageUrl = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl();
-            
-            self.setState({
-                name: name,
-                imageUrl: imageUrl,
-                loggedIn: true
+            gapi.auth2.getAuthInstance().signIn().then(() => {
+                const name = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
+                const imageUrl = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl();
+                
+                self.setState({
+                    name: name,
+                    imageUrl: imageUrl,
+                    loggedIn: true
+                })                
             })
+            
+
         })
         
     }
