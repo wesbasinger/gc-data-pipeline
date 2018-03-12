@@ -9,8 +9,10 @@ const Header = (props) => {
                 props.loggedIn ?
                     <div>
                         Name: {props.name}
-                        <img src={props.imageUrl} />
-                        <button onClick={()=>{props.onLogout}}>Log Out</button>
+                        <img alt="profile pic" src={props.imageUrl} />
+                        <button onClick={()=>{
+                            props.onLogout();
+                        }}>Log Out</button>
                     </div> :
                     <div>
                         Please log in.

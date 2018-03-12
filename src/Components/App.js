@@ -49,7 +49,7 @@ class App extends React.Component {
                     const imageUrl = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl();
                     
                     self.setState({name, imageUrl})
-                }   
+                }
             })
             
         })
@@ -57,7 +57,6 @@ class App extends React.Component {
     
     handleLogout() {
         
-        console.log("Handle logout is firing")
         this.setState({
             loggedIn:false,
             name: "",
@@ -72,6 +71,7 @@ class App extends React.Component {
     
     handleLogin() {
         
+        const self = this;
 
         require('google-client-api')().then((gapi) => {
             gapi.auth2.getAuthInstance().signIn()
@@ -79,7 +79,11 @@ class App extends React.Component {
             const name = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
             const imageUrl = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl();
             
-            console.log(`name is ${name} and imageUrl is ${imageUrl}`)
+            self.setState({
+                name: name,
+                imageUrl: imageUrl,
+                loggedIn: true
+            })
         })
         
     }
