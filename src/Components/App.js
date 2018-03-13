@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Landing from './Landing';
+import CourseDetail from './CourseDetail';
+
 
 import api from '../api';
 
@@ -105,6 +107,7 @@ class App extends React.Component {
                             onLogout={this.handleLogout}/>
                     <Switch>
                         <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn} onLogin={this.handleLogin} courses={this.state.courses}/>}/>
+                        <Route path="/course/:courseId/:courseName" component={CourseDetail} />}/>
                     </Switch>
                     <Footer />
                 </div>
