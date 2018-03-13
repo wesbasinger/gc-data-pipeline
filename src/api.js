@@ -1,22 +1,24 @@
-const funcs = {
-    getCourses: (callback) => {
-        const getPageOfCourses = (request, result) => {
-            request.execute((resp) => {
-                result = result.concat(resp.courses);
-                const nextPageToken = resp.nextPageToken;
-                if (nextPageToken) {
-                    request = window.gapi.client.classroom.courses.list({
-                        'pageToken': nextPageToken
-                    });
-                    getPageOfCourses(request, result);
-                } else {
-                    callback(result);
+export default {
+    
+    getAllCourses : async () => {
+        
+        const results = []
+        
+        const options = {pageSize:10}
+        
+        do {
+            const request = await window.gapi.client.classroom.courses.list(options)
+            
+            request.result.courses.forEach((course) => {
+                
+                if(course.courseState === "ACTIVE") {
+                    results.push(course);    
                 }
-            });
-        };
-        const request = window.gapi.client.classroom.courses.list();
-        getPageOfCourses(request, []);
+                
+            })
+            options.pageToken = request.result.nextPageToken;
+        } while(options.pageToken);
+        
+        return results;
     }
 }
-
-export default funcs;
