@@ -104,7 +104,7 @@ class App extends React.Component {
                             imageUrl={this.state.imageUrl}
                             onLogout={this.handleLogout}/>
                     <Switch>
-                        <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn} onLogin={this.handleLogin}/>}/>
+                        <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn} onLogin={this.handleLogin} courses={this.state.courses}/>}/>
                     </Switch>
                     <Footer />
                 </div>
