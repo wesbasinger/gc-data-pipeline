@@ -42,5 +42,31 @@ export default {
         } while(options.pageToken);
         
         return results
+    },
+    
+    getAllSubmissions: async (courseId, courseWorkId) => {
+        
+        const results = [];
+        
+        const options = {
+            courseId: courseId,
+            courseWorkId: courseWorkId,
+            pageSize: 20
+            
+        };
+        
+        do {
+            const request = await window.gapi.client.classroom.courses.courseWork.studentSubmissions.list(options);
+            
+            request.result.studentSubmissions.forEach((submission) => {
+                results.push(submission);
+            })
+            
+            options.pageToken = request.result.nextPageToken;
+            
+        } while(options.pageToken)
+        
+        return results;
+        
     }
 }

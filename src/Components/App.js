@@ -109,7 +109,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn} onLogin={this.handleLogin} courses={this.state.courses}/>}/>
                         <Route path="/course/:courseId/:courseName" component={CourseDetail} />}/>
-                        <Route path="/courseWork/:courseWorkId/course/:courseId" component={CourseWorkDetail} />}/>
+                        <Route path="/courseWork/:courseWorkId/course/:courseId/title/:title" component={CourseWorkDetail} />}/>
                     </Switch>
                     <Footer />
                 </div>
