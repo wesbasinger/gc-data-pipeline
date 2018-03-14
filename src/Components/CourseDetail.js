@@ -34,7 +34,7 @@ class CourseDetail extends React.Component {
                             
                             this.state.courseWork.map((cw) => {
                             
-                                const composedUrl = `/course/${this.props.match.params.courseId}/courseWork/${cw.id}`
+                                const composedUrl = `/courseWork/${cw.id}/course/${this.props.match.params.courseId}`
                             
                                 return(<Link to={composedUrl}><p>{cw.title}</p></Link>)
                             })

@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Landing from './Landing';
 import CourseDetail from './CourseDetail';
+import CourseWorkDetail from './CourseWorkDetail';
 
 
 import api from '../api';
@@ -108,6 +109,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" render={()=><Landing loggedIn={this.state.loggedIn} onLogin={this.handleLogin} courses={this.state.courses}/>}/>
                         <Route path="/course/:courseId/:courseName" component={CourseDetail} />}/>
+                        <Route path="/courseWork/:courseWorkId/course/:courseId" component={CourseWorkDetail} />}/>
                     </Switch>
                     <Footer />
                 </div>
