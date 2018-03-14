@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import api from '../api';
+import data from '../data';
 
 class CourseWorkDetail extends React.Component {
     
@@ -16,6 +16,8 @@ class CourseWorkDetail extends React.Component {
     componentDidMount() {
         api.getAllSubmissions(this.props.match.params.courseId, this.props.match.params.courseWorkId).then((results) => {
             this.setState({submissions: results})
+            
+            console.log(data.getStatus(results));
         })
     }
     
