@@ -26,6 +26,13 @@ class CourseWorkDetail extends React.Component {
         return(
             <div>
                 <h1>Course Work Detail for {this.props.match.params.title}</h1>
+            
+                {
+                    this.state.submissions.length ?
+                        <div>
+                            {data.analyseStates(this.state.submissions)}
+                        </div> : <div>Please wait for submissions to load.</div>
+                }
             </div>
         )
     }
