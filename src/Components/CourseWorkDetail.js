@@ -49,15 +49,13 @@ class CourseWorkDetail extends React.Component {
                                                 <td>Mean</td>
                                                 <td>Median</td>
                                                 <td>Mode</td>
-                                                <td>Variance</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{grades.mean}</td>
-                                                <td>{grades.median}</td>
-                                                <td>{grades.mode}</td>
-                                                <td>{grades.variance}</td>
+                                                <td>{Math.round(grades.mean)}</td>
+                                                <td>{Math.round(grades.median)}</td>
+                                                <td>{Math.round(grades.mode)}</td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.2.1",
     "google-client-api": "^1.0.4",
     "plotly.js": "^1.35.2",
     "react": "^16.2.0",
