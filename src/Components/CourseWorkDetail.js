@@ -1,4 +1,5 @@
 import React from 'react';
+import Plot from 'react-plotly.js';
 
 import api from '../api';
 import data from '../data';
@@ -25,6 +26,8 @@ class CourseWorkDetail extends React.Component {
         
         if (this.state.submissions.length > 0) {
             grades = data.analyseGrades(this.state.submissions);
+            
+            console.log(grades);
         }
         
         return(
@@ -39,7 +42,34 @@ class CourseWorkDetail extends React.Component {
                             <h2>Grade Stats</h2>
                             {
                                 grades.success ?
-                                <div>{JSON.stringify(grades)}</div> : <div>{grades.message}</div>
+                                <div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td>Mean</td>
+                                                <td>Median</td>
+                                                <td>Mode</td>
+                                                <td>Variance</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{grades.mean}</td>
+                                                <td>{grades.median}</td>
+                                                <td>{grades.mode}</td>
+                                                <td>{grades.variance}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <Plot data={[
+                                            {
+                                                type: "histogram",
+                                                x: grades.values
+                                            }
+                                        ]}/>
+                                    </div>
+                                </div> : <div>{grades.message}</div>
                             }
                         </div> : <div>Please wait for submissions to load.</div>
                 }

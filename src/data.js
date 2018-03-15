@@ -65,7 +65,7 @@ export default {
                 median: stats.median(extractedGrades),
                 mode: stats.mode(extractedGrades),
                 variance: stats.variance(extractedGrades),
-                histogram: stats.histogram(extractedGrades)
+                values: extractedGrades
             }
             
         }
