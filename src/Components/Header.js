@@ -15,7 +15,9 @@ const Header = (props) => {
                                 <li>Name: {props.name}</li>
                                 <li><img height="40px" alt="profile pic" src={props.imageUrl} /></li>
                                 <li>
-                                    <button onClick={()=>{
+                                    <button
+                                        type="button" className="btn btn-primary"
+                                        onClick={()=>{
                                         props.onLogout();
                                     }}>Log Out</button>
                                 </li>

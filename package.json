@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ajv": "^6.2.1",
+    "better-react-spinkit": "^2.0.4",
     "google-client-api": "^1.0.4",
     "plotly.js": "^1.35.2",
     "react": "^16.2.0",

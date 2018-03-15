@@ -1,5 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import { ChasingDots } from 'better-react-spinkit';
 
 import api from '../api';
 import data from '../data';
@@ -69,7 +70,7 @@ class CourseWorkDetail extends React.Component {
                                     </div>
                                 </div> : <div>{grades.message}</div>
                             }
-                        </div> : <div>Please wait for submissions to load.</div>
+                        </div> : <div>Please wait for submissions to load.<ChasingDots /></div>
                 }
             </div>
         )
