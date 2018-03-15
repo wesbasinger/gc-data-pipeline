@@ -1,3 +1,5 @@
+import stats from 'stats-lite';
+
 export default {
     analyseStates : (submissions) => {
         
@@ -33,6 +35,40 @@ export default {
             
         
         return summary;
+        
+    },
+    
+    analyseGrades: (submissions) => {
+        
+        const gradedSubmissions = submissions.filter((submission) => {
+            return(submission.hasOwnProperty('assignedGrade'))
+        })
+        
+        if(gradedSubmissions.length === 0) {
+            
+            return {
+                success: false,
+                message: 'There are no graded submissions available for analysis.'
+            }
+            
+        } else {
+            
+            const extractedGrades = [];
+            
+            gradedSubmissions.forEach((submission) => {
+                extractedGrades.push(submission.assignedGrade);
+            })
+            
+            return {
+                success: true,
+                mean: stats.mean(extractedGrades),
+                median: stats.median(extractedGrades),
+                mode: stats.mode(extractedGrades),
+                variance: stats.variance(extractedGrades),
+                histogram: stats.histogram(extractedGrades)
+            }
+            
+        }
         
     }
 }

@@ -36,7 +36,7 @@ class CourseDetail extends React.Component {
                             
                                 const composedUrl = `/courseWork/${cw.id}/course/${this.props.match.params.courseId}/title/${cw.title}`;
                             
-                                return(<Link to={composedUrl}><p>{cw.title}</p></Link>)
+                                return(<Link key={cw.id} to={composedUrl}><p>{cw.title}</p></Link>)
                             })
                         }
                     </div> : <div>Loading assignments....</div>
