@@ -100,7 +100,7 @@ class App extends React.Component {
     
     render() {
         return(
-            <Router>
+            <Router basename="/gc-data-pipeline">
                 <div>
                     <Header loggedIn={this.state.loggedIn} 
                             name={this.state.name} 
